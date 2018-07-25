@@ -4,7 +4,6 @@ from sqlalchemy import Column, String, Integer, Boolean
 from entity import Entity, Base
 from marshmallow import schema, fields
 
-
 class User(Entity, Base):
     __tablename__ = 'users'
 
@@ -88,7 +87,7 @@ class MentorSurvey(Entity, Base):
         self.cpa = cpa
         self.leadership_skills = leadership_skills
         self.education_advice = education_advice
-        self.finance = finance 
+        self.finance = finance
 
 class MentorSurvey(Schema):
     user_id = fields.Integer()
@@ -109,7 +108,7 @@ class MenteeSurvey(Entity, Base):
     life_at_nike = Column(Integer)
     education_advice = Column(Integer)
     finance = Column(Integer)
-    
+
     def __init__(self, user_id, location, cpa, leadership_skills, life_at_nike, education, finance):
         Entity.__init__(self)
         self.user_id = user_id
@@ -127,6 +126,3 @@ class MenteeSurvey(Schema):
     life_at_nike = fields.Integer()
     education_advice = fields.Integer()
     finance = fields.Integer()
-    
-
-
