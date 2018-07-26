@@ -2,7 +2,7 @@
 
 from sqlalchemy import Column, String, Integer, Boolean
 from entity import Entity, Base
-from marshmallow import schema, fields
+from marshmallow import Schema, fields
 
 
 class User(Entity, Base):
@@ -14,7 +14,7 @@ class User(Entity, Base):
     is_mentee = Column(Boolean)
     password = Column(String)
     email = Column(String)
-    job_title = Column(Stirng)
+    job_title = Column(String)
     department = Column(String)
     bio = Column(String)
     employee_network = Column(String)
@@ -25,7 +25,7 @@ class User(Entity, Base):
         self.name = name
         self.employee_id = employee_id
         self.is_mentor = is_mentor
-        self.is_mentee = is_mente
+        self.is_mentee = is_mentee
         self.password = password
         self.email = email
         self.job_title = job_title
@@ -48,7 +48,7 @@ class UserSchema(Schema):
     num_to_network = fields.Integer()
 
 
-class Relatioship(Entity, Base)
+class Relatioship(Entity, Base):
     __tablename__='relationships'
 
     mentor_name = Column(String)
@@ -84,7 +84,7 @@ class MentorSurvey(Entity, Base):
     def __init__(self, user_id, location, cpa, leadership_skills, life_at_nike, education, finance):
         Entity.__init__(self)
         self.user_id = user_id
-        self.loaction = location
+        self.location = location
         self.cpa = cpa
         self.leadership_skills = leadership_skills
         self.education_advice = education_advice
@@ -113,7 +113,7 @@ class MenteeSurvey(Entity, Base):
     def __init__(self, user_id, location, cpa, leadership_skills, life_at_nike, education, finance):
         Entity.__init__(self)
         self.user_id = user_id
-        self.loaction = location
+        self.location = location
         self.cpa = cpa
         self.leadership_skills = leadership_skills
         self.education_advice = education_advice
