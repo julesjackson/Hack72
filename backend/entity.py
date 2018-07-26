@@ -15,6 +15,9 @@ db_password = 'mentor72' #TODO hide
 engine = create_engine(f'postgresql:///{db_name}')
 Session = sessionmaker(bind=engine)
 
+#start db session
+session = Session()
+
 Base = declarative_base()
 
 class Entity():
