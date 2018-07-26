@@ -81,7 +81,7 @@ class MentorSurvey(Entity, Base):
     education_advice = Column(Integer)
     finance = Column(Integer)
 
-    def __init__(self, user_id, location, cpa, leadership_skills, life_at_nike, education, finance):
+    def __init__(self, user_id, location, cpa, leadership_skills, life_at_nike, education_advice, finance):
         Entity.__init__(self)
         self.user_id = user_id
         self.location = location
@@ -110,7 +110,7 @@ class MenteeSurvey(Entity, Base):
     education_advice = Column(Integer)
     finance = Column(Integer)
     
-    def __init__(self, user_id, location, cpa, leadership_skills, life_at_nike, education, finance):
+    def __init__(self, user_id, location, cpa, leadership_skills, life_at_nike, education_advice, finance):
         Entity.__init__(self)
         self.user_id = user_id
         self.location = location
