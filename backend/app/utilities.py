@@ -4,6 +4,8 @@ from entity import session, engine, Base
 
 seed(7242018)
 
+survey_fields = ['cpa', 'leadership_skills', 'life_at_nike', 'education_advice',
+    'finance', 'location']
 job_title_seq = ['entry', 'senior', 'manager']
 depart_seq = ['technology', 'digital', 'hr', 'warehouse']
 emp_network_seq = ['Women in Stem', 'Pride employeess', 'Black employees',
@@ -109,4 +111,61 @@ def create_test_db():
     #TODO Populate Relationship Table
 
     session.commit()
-    session.close()
+
+def matches(new_user):
+    #find mentor
+    if new_user['is_mentee']:
+        mentor_ranking = []
+        all_mentors = session.query(Users).filter(Users.is_mentor == True).all()
+        #print(all_mentors)
+
+        for mentor in all_mentors:
+            cur_mentor = session.query(MentorSurvey).filter(
+                MentorSurvey.user_id == mentor.employee_id).first()
+
+            score = 0
+            if new_user['location'] == cur_mentor.location:
+                score += 1
+            if new_user['cpa'] == cur_mentor.cpa:
+                score += 1
+            if new_user['leadership_skills'] == cur_mentor.leadership_skills:
+                score += 1
+            if new_user['life_at_nike'] == cur_mentor.life_at_nike:
+                score += 1
+            if new_user['education_advice'] == cur_mentor.education_advice:
+                score += 1
+            if new_user['finance'] == cur_mentor.finance:
+                score += 1
+
+            mentor_ranking.append((mentor.employee_id, score))
+
+            mentor_ranking.sort(key=lambda tup:tup[1])
+        return mentor_ranking
+
+    #find mentee
+    if new_user['is_mentor']:
+        mentee_ranking = []
+        all_mentees = session.query(Users).filter(Users.is_mentee == True).all()
+
+        for mentees in all_mentees:
+            cur_mentee = session.query(MenteeSurvey).filter(
+                MenteeSurvey.user_id == mentee.employee_id).first()
+
+            score = 0
+            if new_user['location'] == cur_mentee.location:
+                score += 1
+            if new_user['cpa'] == cur_mentee.cpa:
+                score += 1
+            if new_user['leadership_skills'] == cur_mentee.leadership_skills:
+                score += 1
+            if new_user['life_at_nike'] == cur_mentee.life_at_nike:
+                score += 1
+            if new_user['education_advice'] == cur_mentee.education_advice:
+                score += 1
+            if new_user['finance'] == cur_mentee.finance:
+                score += 1
+
+            mentee_ranking.append((mentee.employee_id, score))
+            mentee__ranking.sort(key=lambda tup:tup[1])
+
+        return mentee__ranking
