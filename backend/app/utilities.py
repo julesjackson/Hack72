@@ -103,7 +103,7 @@ def create_test_db():
             session.add(mentee_survey)
 
     results = session.query(Users).all()
-    if len(results) == 5:
+    if len(results) == 8:
         print("Successfully added dummy values to data")
     else:
         print(f"Error only had {len(results)} entries in database")
