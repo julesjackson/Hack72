@@ -85,7 +85,6 @@ def add_user():
         session.add(mentee_survey)
 
     ranked = matches(entry)
-    print(ranked)
 
     session.commit()
 
