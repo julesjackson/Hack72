@@ -7,7 +7,8 @@ from marshmallow import Schema, fields
 class Users(Entity, Base):
     __tablename__ = 'users'
 
-    name = Column(String)
+    fname = Column(String)
+    lname = Column(String)
     employee_id = Column(Integer)
     is_mentor = Column(Boolean)
     is_mentee = Column(Boolean)
@@ -18,12 +19,14 @@ class Users(Entity, Base):
     bio = Column(String)
     employee_network = Column(String)
     num_to_mentor = Column(Integer)
+    profile_pic = Column(String)
 
-
-    def __init__(self, name, employee_id, is_mentor, is_mentee, password, email,
-        job_title, department, bio, employee_network, num_to_mentor):
+    def __init__(self, first_name, last_name, employee_id, is_mentor, is_mentee,
+        password, email, job_title, department, bio, employee_network,
+        num_to_mentor, profile_pic):
         Entity.__init__(self)
-        self.name = name
+        self.fname = first_name
+        self.lname = last_name
         self.employee_id = employee_id
         self.is_mentor = is_mentor
         self.is_mentee = is_mentee
@@ -34,9 +37,11 @@ class Users(Entity, Base):
         self.bio = bio
         self.employee_network = employee_network
         self.num_to_mentor = num_to_mentor
+        self.profile_pic = profile_pic
 
 class UserSchema(Schema):
-    name = fields.Str()
+    fname = fields.Str()
+    lname = fields.Str()
     employee_id = fields.Integer()
     is_mentor = fields.Boolean()
     is_Mentee = fields.Boolean()
@@ -47,7 +52,7 @@ class UserSchema(Schema):
     bio = fields.Str()
     employee_network = fields.Str()
     num_to_mentor = fields.Integer()
-
+    profile_pic =fields.Str()
 
 class Relatioship(Entity, Base):
     __tablename__='relationships'

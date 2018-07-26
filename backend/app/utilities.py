@@ -13,27 +13,27 @@ emp_network_seq = ['Women in Stem', 'Pride employeess', 'Black employees',
 
 users_list = [
     {
-        'name': 'Alice', 'employee_id': randint(50, 100),
+        'fname': 'Alice', 'lname': 'Allen', 'employee_id': randint(50, 100),
         'is_mentor': True, 'is_mentee': False,
         'password': 'nike', 'email': 'employee@nike.com',
         'job_title': choice(job_title_seq), 'department': choice(depart_seq),
         'bio': 'user info', 'employee_network': [],
         'num_to_mentor': 3, 'location': 'WHQ', 'cpa': randrange(1, 6),
         'leadership_skills': randrange(1, 6), 'life_at_nike': randrange(1, 6),
-        'education_advice': randrange(1, 6), 'finance': randrange(1, 6)
+        'education_advice': randrange(1, 6), 'finance': randrange(1, 6), 'url':''
     },
     {
-        'name': 'Bob', 'employee_id': randint(50, 100),
+        'fname': 'Bob', 'lname': 'Bolton', 'employee_id': randint(50, 100),
         'is_mentor': False, 'is_mentee': True,
         'password': 'nike', 'email': 'employee@nike.com',
         'job_title': choice(job_title_seq), 'department': choice(depart_seq),
         'bio': 'user info', 'employee_network': [choice(emp_network_seq)],
         'num_to_mentor': 0, 'location': 'WHQ', 'cpa': randrange(1, 6),
         'leadership_skills': randrange(1, 6), 'life_at_nike': randrange(1, 6),
-        'education_advice': randrange(1, 6), 'finance': randrange(1, 6)
+        'education_advice': randrange(1, 6), 'finance': randrange(1, 6), 'url':''
     },
     {
-        'name': 'Carol', 'employee_id': randint(50, 100),
+        'fname': 'Carol', 'lname': 'Carson', 'employee_id': randint(50, 100),
         'is_mentor': True, 'is_mentee': False,
         'password': 'nike', 'email': 'employee@nike.com',
         'job_title': choice(job_title_seq), 'department': choice(depart_seq),
@@ -41,20 +41,20 @@ users_list = [
         'employee_network': [choice(emp_network_seq), choice(emp_network_seq)],
         'num_to_mentor': 3, 'location': 'EHQ', 'cpa': randrange(1, 6),
         'leadership_skills': randrange(1, 6), 'life_at_nike': randrange(1, 6),
-        'education_advice': randrange(1, 6), 'finance': randrange(1, 6)
+        'education_advice': randrange(1, 6), 'finance': randrange(1, 6), 'url':''
     },
     {
-        'name': 'Diana', 'employee_id': randint(50, 100),
+        'fname': 'Diana', 'lname': 'Diners', 'employee_id': randint(50, 100),
         'is_mentor': True, 'is_mentee': True,
         'password': 'nike', 'email': 'employee@nike.com',
         'job_title': choice(job_title_seq), 'department': choice(depart_seq),
         'bio': 'user info', 'employee_network': [choice(emp_network_seq)],
         'num_to_mentor': 3, 'location': 'WHQ', 'cpa': randrange(1, 6),
         'leadership_skills': randrange(1, 6), 'life_at_nike': randrange(1, 6),
-        'education_advice': randrange(1, 6), 'finance': randrange(1, 6)
+        'education_advice': randrange(1, 6), 'finance': randrange(1, 6), 'url':''
     },
     {
-        'name': 'Eric', 'employee_id': randint(50, 100),
+        'fname': 'Eric', 'lname': 'Ericson', 'employee_id': randint(50, 100),
         'is_mentor': False, 'is_mentee': True,
         'password': 'nike', 'email': 'employee@nike.com',
         'job_title': choice(job_title_seq), 'department': choice(depart_seq),
@@ -62,7 +62,7 @@ users_list = [
         'employee_network': [choice(emp_network_seq), choice(emp_network_seq)],
         'num_to_mentor': 0, 'location': 'EHQ', 'cpa': randrange(1, 6),
         'leadership_skills': randrange(1, 6), 'life_at_nike': randrange(1, 6),
-        'education_advice': randrange(1, 6), 'finance': randrange(1, 6)
+        'education_advice': randrange(1, 6), 'finance': randrange(1, 6), 'url':''
     }
 ]
 
@@ -74,10 +74,10 @@ def create_test_db():
     for entry in users_list:
         #Populate users table
         new_user = Users(
-            entry['name'], entry['employee_id'], entry['is_mentor'],
+            entry['fname'], entry['lname'], entry['employee_id'], entry['is_mentor'],
             entry['is_mentee'], entry['password'], entry['email'],
             entry['job_title'], entry['department'], entry['bio'],
-            entry['employee_network'], entry['num_to_mentor']
+            entry['employee_network'], entry['num_to_mentor'], entry['url']
         )
 
         session.add(new_user)

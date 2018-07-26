@@ -26,10 +26,24 @@ def get_user(employee_id):
     if temp is None:
         return "No employee with that id found", 400
 
-    schema = UserSchema(many=False)
-    results = schema.dump(temp)
+    results = {
+        'Email': temp.email,
+        'Password': temp.password,
+        'First Name': temp.fname,
+        'Last Name': temp.lname,
+        'Job Title': temp.job_title,
+        'Department': temp.department,
+        'Employee Networks': temp.employee_network,
+        'url': temp.profile_pic
+    }
+    if temp.is_mentee and not temp.is_mentor:
+        results['Role'] = 'Mentee'
+    elif not temp.is_mentee and temp.is_mentor:
+        results['Role'] = 'Mentor'
+    else:
+        results['Role'] = 'Both'
 
-    return jsonify(results.data)
+    return jsonify(results)
 
 @app.route('/mentors')
 def get_all_mentors():
@@ -57,10 +71,11 @@ def add_user():
     entry = json.loads(request.data)
 
     new_user = Users(
-            entry['name'], entry['employee_id'], entry['is_mentor'],
-            entry['is_mentee'], entry['password'], entry['email'],
-            entry['job_title'], entry['department'], entry['bio'],
-            entry['employee_network'], entry['num_to_mentor']
+            entry['fname'], entry['lname'], entry['employee_id'],
+            entry['is_mentor'], entry['is_mentee'], entry['password'],
+            entry['email'], entry['job_title'], entry['department'],
+            entry['bio'], entry['employee_network'], entry['num_to_mentor'],
+            entry['url']
     )
     session.add(new_user)
 
@@ -88,4 +103,28 @@ def add_user():
 
     session.commit()
 
-    return json.dumps(ranked)
+    profile_list = []
+    for prof in ranked:
+        temp = session.query(Users).filter(Users.employee_id == prof[0]).first()
+        schema = UserSchema(many=False)
+        results = {
+            'Email': temp.email,
+            'Password': temp.password,
+            'First Name': temp.fname,
+            'Last Name': temp.lname,
+            'Job Title': temp.job_title,
+            'Department': temp.department,
+            'Employee Networks': temp.employee_network,
+            'url': temp.profile_pic
+        }
+        if temp.is_mentee and not temp.is_mentor:
+            results['Role'] = 'Mentee'
+        elif not temp.is_mentee and temp.is_mentor:
+            results['Role'] = 'Mentor'
+        else:
+            results['Role'] = 'Both'
+        profile_list.append(schema.dump(temp))
+
+    print(profile_list)
+
+    return jsonify(profile_list)
