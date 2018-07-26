@@ -36,7 +36,7 @@ class User(Entity, Base):
 
 class UserSchema(Schema):
     name = fields.Str()
-    employee = fields.Integer()
+    employee_id = fields.Integer()
     is_mentor = fields.Boolean()
     is_Mentee = fields.Boolean()
     password = fields.Str()
