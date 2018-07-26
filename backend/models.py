@@ -2,9 +2,9 @@
 
 from sqlalchemy import Column, String, Integer, Boolean
 from entity import Entity, Base
-from marshmallow import schema, fields
+from marshmallow import Schema, fields
 
-class User(Entity, Base):
+class Users(Entity, Base):
     __tablename__ = 'users'
 
     name = Column(String)
@@ -13,25 +13,27 @@ class User(Entity, Base):
     is_mentee = Column(Boolean)
     password = Column(String)
     email = Column(String)
-    job_title = Column(Stirng)
+    job_title = Column(String)
     department = Column(String)
     bio = Column(String)
     employee_network = Column(String)
     num_to_mentor = Column(Integer)
 
-    def __init__(self, name, employee_id, is_mentor, is_mentee, password, email,job_title, department, bio, employee_network, num_to_mentor):
+
+    def __init__(self, name, employee_id, is_mentor, is_mentee, password, email,
+        job_title, department, bio, employee_network, num_to_mentor):
         Entity.__init__(self)
         self.name = name
         self.employee_id = employee_id
         self.is_mentor = is_mentor
-        self.is_mentee = is_mente
+        self.is_mentee = is_mentee
         self.password = password
         self.email = email
         self.job_title = job_title
         self.department = department
         self.bio = bio
         self.employee_network = employee_network
-        self.num_to_network = num_to_network
+        self.num_to_mentor = num_to_mentor
 
 class UserSchema(Schema):
     name = fields.Str()
@@ -44,10 +46,10 @@ class UserSchema(Schema):
     department = fields.Str()
     bio = fields.Str()
     employee_network = fields.Str()
-    num_to_network = fields.Integer()
+    num_to_mentor = fields.Integer()
 
 
-class Relatioship(Entity, Base)
+class Relatioship(Entity, Base):
     __tablename__='relationships'
 
     mentor_name = Column(String)
@@ -80,16 +82,18 @@ class MentorSurvey(Entity, Base):
     education_advice = Column(Integer)
     finance = Column(Integer)
 
-    def __init__(self, user_id, location, cpa, leadership_skills, life_at_nike, education, finance):
+    def __init__(self, user_id, location, cpa, leadership_skills, life_at_nike,
+        education, finance):
         Entity.__init__(self)
         self.user_id = user_id
         self.loaction = location
         self.cpa = cpa
         self.leadership_skills = leadership_skills
-        self.education_advice = education_advice
+        self.life_at_nike = life_at_nike
+        self.education_advice = education
         self.finance = finance
 
-class MentorSurvey(Schema):
+class MentorSurveySchema(Schema):
     user_id = fields.Integer()
     location = fields.Str()
     cpa = fields.Integer()
@@ -109,16 +113,18 @@ class MenteeSurvey(Entity, Base):
     education_advice = Column(Integer)
     finance = Column(Integer)
 
-    def __init__(self, user_id, location, cpa, leadership_skills, life_at_nike, education, finance):
+    def __init__(self, user_id, location, cpa, leadership_skills, life_at_nike,
+        education, finance):
         Entity.__init__(self)
         self.user_id = user_id
         self.loaction = location
         self.cpa = cpa
         self.leadership_skills = leadership_skills
-        self.education_advice = education_advice
+        self.life_at_nike = life_at_nike
+        self.education_advice = education
         self.finance = finance
 
-class MenteeSurvey(Schema):
+class MenteeSurveySchema(Schema):
     user_id = fields.Integer()
     location = fields.Str()
     cpa = fields.Integer()
