@@ -37,7 +37,7 @@ class Users(Entity, Base):
 
 class UserSchema(Schema):
     name = fields.Str()
-    employee = fields.Integer()
+    employee_id = fields.Integer()
     is_mentor = fields.Boolean()
     is_Mentee = fields.Boolean()
     password = fields.Str()
@@ -83,14 +83,14 @@ class MentorSurvey(Entity, Base):
     finance = Column(Integer)
 
     def __init__(self, user_id, location, cpa, leadership_skills, life_at_nike,
-        education, finance):
+        education_advice, finance):
         Entity.__init__(self)
         self.user_id = user_id
-        self.loaction = location
+        self.location = location
         self.cpa = cpa
         self.leadership_skills = leadership_skills
         self.life_at_nike = life_at_nike
-        self.education_advice = education
+        self.education_advice = education_advice
         self.finance = finance
 
 class MentorSurveySchema(Schema):
@@ -114,14 +114,14 @@ class MenteeSurvey(Entity, Base):
     finance = Column(Integer)
 
     def __init__(self, user_id, location, cpa, leadership_skills, life_at_nike,
-        education, finance):
+        education_advice, finance):
         Entity.__init__(self)
         self.user_id = user_id
-        self.loaction = location
+        self.location = location
         self.cpa = cpa
         self.leadership_skills = leadership_skills
         self.life_at_nike = life_at_nike
-        self.education_advice = education
+        self.education_advice = education_advice
         self.finance = finance
 
 class MenteeSurveySchema(Schema):
